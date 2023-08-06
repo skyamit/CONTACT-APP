@@ -50,38 +50,37 @@ function Home(props) {
         name && name.current && (name.current.value = "");
         contact && contact.current && (contact.current.value = "");
     }
-    const getName = ()=>{
-        console.log('getName')
-        if(id) {
-            for(var i =0; i<data.length; i++) {
-                const d = data.slice(i,i+1)[0];
-                if(d.id === id) {
-                    name.current.value = d.name;
-                }
-            }
-        }
-        return ''
-    }
-    const getNumber = ()=>{
-        console.log('getPhone')
-        if(id) {
-            for(var i =0; i<data.length; i++) {
-                const d = data.slice(i,i+1)[0];
-                if(d.id === id) {
-                    contact.current.value = d.phone;
-                }
-            }
-        }
-    }
+
     useEffect(()=>{
         if(data.length === 0){
             fetchUsers();
         }
-        if(id) {
-            getNumber();
-            getName();
+        const getName = ()=>{
+            console.log('getName')
+            if(id) {
+                for(var i =0; i<data.length; i++) {
+                    const d = data.slice(i,i+1)[0];
+                    if(d.id === id) {
+                        name.current.value = d.name;
+                    }
+                }
+            }
+            return ''
         }
-    },[props,id, data.length]);
+        const getNumber = ()=>{
+            console.log('getPhone')
+            if(id) {
+                for(var i =0; i<data.length; i++) {
+                    const d = data.slice(i,i+1)[0];
+                    if(d.id === id) {
+                        contact.current.value = d.phone;
+                    }
+                }
+            }
+        }
+        getNumber();
+        getName();
+    },[props,id, data]);
     
     return (
         <ContactContext.Provider value={{data, setData, id, setID}} >
