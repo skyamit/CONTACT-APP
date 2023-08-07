@@ -21,6 +21,7 @@ function Home(props) {
         const cc = await contact.current.value;
         if(nn === '' || cc === '') {
             alert("Provide correct details");
+            return;
         }
         if( id ) {
             for(var i =0; i<data.length; i++) {
